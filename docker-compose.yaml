@@ -1,0 +1,18 @@
+version: '3'
+services:
+  clinux:
+    build:
+      context: .
+      target: DEVGCC
+    user: coder
+    volumes:
+      - .:/home/coder/clinux:cached
+      - vscode_server_ext:/root/.vscode-server/extensions
+      - vscode_server_ins_ext:/root/.vscode-server-insiders/extensions
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    ports:
+      - "2222:22"
+
+volumes:
+  vscode_server_ext:
+  vscode_server_ins_ext:
