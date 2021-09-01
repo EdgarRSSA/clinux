@@ -3,6 +3,15 @@
     "files.eol": "\n",
     "files.associations": {
         ".php": "php",
-        "errno.h": "c"
+        "errno.h": "c",
+        "socket.h": "c",
+        "features.h": "c",
+        "socket_type.h": "c",
+        "sockaddr.h": "c",
+        "stdlib.h": "c",
+        "errno-base.h": "c",
+        "unistd.h": "c",
+        "file.h": "c",
+        "types.h": "c"
     },
 }
