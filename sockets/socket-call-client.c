@@ -13,13 +13,10 @@ const char *s_path = "./thesocket"; // Socket path
 
 void handle_sigint(int sig) // MANEJADOR DE SEÑAL DE INTERRUPCION
 {
-    printf("shutdown() : ok \n", sig);
-    // Detener socket
-    shutdown(socket_fd, SHUT_RDWR);
+    printf("close() : ok \n", sig);
+
     // Close
     close(socket_fd);
-    // Remover socket
-    remove(s_path);
 
     // Exit
     exit(EXIT_FAILURE);
@@ -57,56 +54,32 @@ int main(){ // MAIN ENTRY
         // Llamada a socket() correcta:
         printf("socket(...) FD: %d\n",socket_fd);
 
+        // Verificar dirrecion del socket:
+        struct stat sock_stat;
+        stat(s_path, &sock_stat);
+        printf("Address is Socket: %d\n",S_ISSOCK(sock_stat.st_mode));
+
         // Llamada a bind():
-        if ( bind(socket_fd,&s_address,sizeof(s_address)) == -1)
+        if ( connect(socket_fd,&s_address,sizeof(s_address)) == -1)
         {
             // Error al llamar bind():
-            printf("bind(...) ERROR: %s\n",strerror(errno));
+            printf("connect(...) ERROR: %s\n",strerror(errno));
 
         }
         else
         {
             // Llamada a bind() correcta:
-            printf("bind(...) Address : %s\n",s_address.sa_data);
+            printf("connect(...) Address : %s\n",s_address.sa_data);
 
-            // Verificar la creacion del socket:
-            struct stat sock_stat;
-            stat(s_path, &sock_stat);
-            printf("Address is Socket: %d\n",S_ISSOCK(sock_stat.st_mode));
-
-            // Llamada a listen()
-            if (listen(socket_fd,5)==-1)
-            {
-                // Error al llamar listen();
-                printf("listen(...) ERROR: %s\n", strerror(errno));
+            char *buf="HELLO WORLD";
+            if (write(socket_fd, buf, strlen(buf)) != strlen(buf)){
+                printf("write(...)  Partial/failed");
             }
-            else
+            printf("BUFFER : %s", buf);
+            for (;;)
             {
-                // Llamada a listen() correcta:
-                printf("listen(...) listening : ok\n");
-                signal(SIGINT, handle_sigint);
-
-                // PASSIVE SOCKET LISTENING
-                int cfd = accept(socket_fd, NULL, NULL);
-                printf("Conexion Accepted : %d\n", cfd);
-
-                // READ
-                char *buf="";
-                while (read(socket_fd, buf, 2) > 0){
-                    printf("write(...)  Partial/failed\n");
-                }
-                printf("BUFFER : %s", buf);
-
-                for (;;)
-                {
-                    /* code */
-                }
-
-
+                /* code */
             }
-
-
-
         }
     }
 
