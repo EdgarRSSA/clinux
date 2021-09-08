@@ -12,6 +12,7 @@
         "errno-base.h": "c",
         "unistd.h": "c",
         "file.h": "c",
-        "types.h": "c"
+        "types.h": "c",
+        "string.h": "c"
     },
 }
