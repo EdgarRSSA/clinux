@@ -1,7 +1,13 @@
+#!/usr/bin/env bash
+LOG="./../../logger.sh";
+${LOG} "clear";
+
 # Ejecutar Archivo de compilacion
 # Prueba para escribir desde multiples procesos a un archivo.
-# Rutas:
 
+#
+# Rutas:
+#
 outbuild="./out";
 runfile="${outbuild}/runread";
 prerun="./run-write.sh";
@@ -10,28 +16,29 @@ openfile="./text.example.txt";
 if [[ ! -d ${outbuild} ]]; then
     mkdir ${outbuild}
 fi
-echo -e "[$( date +%T )] MAIN:${mainfile} RUN:${runfile} FILE:${openfile}";
+
+$LOG "log" "PWD:${PWD} MAIN:${mainfile} RUN:${runfile} FILE:${openfile}";
 
 #
-# Correr primero 'prerun'
+# Revisar archivo 'openfile'
 #
 
 if [[ ! -e ${openfile} ]]; then
-    ( echo -e "[$( date +%T )] bash ${prerun}" && bash ${prerun} && sleep 2 && echo "" ) || exit 1;
-
+    $LOG "log" "Run first 'bash ${prerun}'";
+    exit 1;
 fi
 
 #
 # Compilacion:
 #
 
-( echo -e "[$( date +%T )] gcc -o ${runfile} ${mainfile}" && gcc -o "${runfile}" "${mainfile}" ) || exit 1;
+$LOG "run" "gcc -o ${runfile} ${mainfile}" || exit $?;
 
 #
 # Ejecucion:
 #
 
-echo -e "[$( date +%T )] ${runfile} ${openfile} (15)";
+$LOG "log" "${runfile} ${openfile} (15)";
 ( ${runfile} ${openfile} 0 ) & \
 ( ${runfile} ${openfile} 1 ) & \
 ( ${runfile} ${openfile} 2 ) & \
@@ -47,3 +54,4 @@ echo -e "[$( date +%T )] ${runfile} ${openfile} (15)";
 ( ${runfile} ${openfile} 12 ) & \
 ( ${runfile} ${openfile} 13 ) & \
 ( ${runfile} ${openfile} 14 ) &
+wait

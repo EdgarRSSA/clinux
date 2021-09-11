@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
     printf("File IO\n");
 
     // OPEN
-    int file1 = open("./text.txt",O_RDWR|O_CREAT,S_IRUSR|S_IWUSR);
+    int file1 = open("./text.example.txt",O_RDWR|O_CREAT,S_IRUSR|S_IWUSR);
     /*
           ^       ^        ^            ^               ^
           |       |        |            |               |
