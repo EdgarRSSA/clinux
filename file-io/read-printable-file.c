@@ -11,7 +11,7 @@
 int main(int argc, char const *argv[])
 {
     // OPEN
-    char *file1_path = "./text.txt";
+    char *file1_path = "./text.example.txt";
     int file1 = open(file1_path, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     if (file1 == -1) // Errors
     {
