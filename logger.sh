@@ -45,16 +45,18 @@ if [[ $1 == "run" ]]; then
     if [[ ${ecode} != 0 ]];then
         # LOG TO ERROR.LOG
         echo -e ${LOGSIMPLE} >> $__log_err;
+        cat $__log_out_t >> $__log_err;
         cat $__log_err_t >> $__log_err;
         echo -e "EXIT:${ecode}" >> $__log_err;
 
         # LOG TO OUT.LOG
         echo -e ${LOGSIMPLE} >> $__log_out;
+        cat $__log_out_t >> $__log_out;
         cat $__log_err_t >> $__log_out;
         echo -e "EXIT:${ecode}" >> $__log_out;
 
         # CONSOLE ERROR
-        echo -e ${LOGCMD} && echo -e "${COE}$(cat $__log_err_t)${COR}"  && echo -e "EXIT:${ecode}";
+        echo -e ${LOGCMD} && echo -e "${COE}$(cat $__log_out_t)${COR}" && echo -e "${COE}$(cat $__log_err_t)${COR}"  && echo -e "EXIT:${ecode}";
         exit ${ecode};
     fi
     if [[ ${ecode} == 0 ]];then
@@ -84,16 +86,18 @@ if [[ $1 == "runq" ]]; then
     if [[ ${ecode} != 0 ]];then
         # LOG TO ERROR.LOG
         echo -e ${LOGSIMPLE} >> $__log_err;
+        cat $__log_out_t >> $__log_err;
         cat $__log_err_t >> $__log_err;
         echo -e "EXIT:${ecode}" >> $__log_err;
 
         # LOG TO OUT.LOG
         echo -e ${LOGSIMPLE} >> $__log_out;
+        cat $__log_out_t >> $__log_out;
         cat $__log_err_t >> $__log_out;
         echo -e "EXIT:${ecode}" >> $__log_out;
 
         # CONSOLE ERROR
-        echo -e "EXIT:${ecode}";
+        echo -e ${LOGCMD} && echo -e "EXIT:${ecode}";
         exit ${ecode};
     fi
     if [[ ${ecode} == 0 ]];then
