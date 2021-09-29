@@ -37,7 +37,9 @@ if [[ $1 == "run" ]]; then
     __log_err_t="${__dirlog}/err-${UUID}.log";
 
     {
+        $3; # BEFORE RUN
         $2 1> $__log_out_t 2> $__log_err_t;
+        $4; # AFTER RUN
     } &
     wait -n %1 ;
     ecode=$?;
@@ -78,7 +80,9 @@ if [[ $1 == "runq" ]]; then
     __log_err_t="${__dirlog}/err-${UUID}.log";
 
     {
+        $3; # BEFORE RUN
         $2 1> $__log_out_t 2> $__log_err_t;
+        $4; # AFTER RUN
     } &
     wait -n %1 ;
     ecode=$?;
