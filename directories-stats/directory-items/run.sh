@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-LOG="./../logger.sh";
+LOG="./../../logger.sh";
 ${LOG} "clear";
 
 # Compilar y Ejecutar
