@@ -3,10 +3,13 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc build active file",
-            "command": "/usr/local/bin/gcc",
+            "command": "/usr/bin/gcc",
             "args": [
                 "-ggdb",
+                "-Wall",
                 "${file}",
+                "./Ej.c",
+                "./Headers.h",
                 "-o",
                 "${fileDirname}/out/run"
             ],
