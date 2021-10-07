@@ -8,8 +8,6 @@
                 "-ggdb",
                 "-Wall",
                 "${file}",
-                "./Ej.c",
-                "./Headers.h",
                 "-o",
                 "${fileDirname}/out/run"
             ],

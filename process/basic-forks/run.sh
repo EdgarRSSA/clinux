@@ -4,7 +4,7 @@
 
 outbuild="./out";
 mainfile="./Fork.c";
-files="./Headers.h Ej.c";
+files="";
 runfile="${outbuild}/fork";
 
 if [[ ! -d ${outbuild} ]]; then
