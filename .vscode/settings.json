@@ -16,6 +16,7 @@
         "string.h": "c",
         "prepare.h": "c",
         "_read.c": "cpp",
-        "signal.h": "c"
+        "signal.h": "c",
+        "threads.h": "c"
     },
 }
